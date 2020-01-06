@@ -74,7 +74,7 @@
                     <!-- Shopping cart button -->
                         <li class="nav-item dropdown">
                             <div class="image">
-                            <img src="cart.png" id="pop" style="margin-right:5px" height="40px" width="45px">
+                            <img src="http://127.0.0.1:8000/cart.png" id="pop" style="margin-right:5px" height="40px" width="45px">
                             <?php $count=0 ?>
                             @foreach(Cart::content() as $cartItem)
                             <?php $count = $count + $cartItem->qty ?>  
@@ -111,7 +111,7 @@
                                                         <!-- Remove product button -->
                                                         <a href="{{ route('remove', [ $cartItem->rowId ]) }}">x</a>
                                                     </td>
-                                                    <td style="white-space:nowrap;"><img width="30px" height="30px" src={{\App\Product::find($cartItem->id)->image}}> {{ $cartItem->name }} </td>
+                                                    <td style="white-space:nowrap;"><img width="30px" height="30px" src={{"http://127.0.0.1:8000/".\App\Product::find($cartItem->id)->image}}> {{ $cartItem->name }} </td>
                                                     
                                                     <td>{{ $cartItem->qty }}</td>
                                                     <td>{{ $cartItem->price }}₹</td>

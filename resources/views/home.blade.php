@@ -1,5 +1,6 @@
 @extends('layouts.app')
 
+
 @section('content')
     <div class="container">
         @if(Session::has('success'))
@@ -23,13 +24,14 @@
         <div class="container"> 
             <form action="/home" method="POST">
                 @csrf
-                <select style="padding:6px" name="category">
-                    <option value="electronics" selected>Electronics</option>
-                    <option value="fashion">Fashion</option>
-                    <option value="home-decor">Home Decor</option>
+                <select selected="" style="padding:6px" name="category">
+                    <option value="electronics" {{ Session::get('category')=="electronics" ? "selected" : "" }}>Electronics</option>
+                    <option value="fashion" {{ Session::get('category')=="fashion" ? "selected" : "" }}>Fashion</option>
+                    <option value="home-decor" {{ Session::get('category')=="home-decor" ? "selected" : "" }}>Home Decor</option>
                 </select>
-                &nbsp; &nbsp; <input style="padding:6px; border:'0px black dashed';" name="maximum_price" type="text" placeholder=" Maximum Price (₹)" autocomplete="off" required/>
+            &nbsp; &nbsp; <input style="padding:6px; border:'0px black dashed';" name="maximum_price" type="text" placeholder=" Maximum Price (₹)" value="{{Session::get('maximum_price')}}" autocomplete="off" required/>
                 &nbsp; &nbsp;<button type="submit" class="btn btn-primary">Search</button>  
+                &nbsp; &nbsp;<button type="reset" name='clear' class="btn btn-primary">Clear</button>  
             </form> 
             <p style="color:red">@error('maximum_price') {{$message}} @enderror  </p>
         </div>
@@ -45,7 +47,11 @@
                         </div>
                         <div class="card-header">
                             <!-- The product image (duh..) -->
-                            <img src={{ $product->image }} width="210px" height="220px">
+                            <?php $path=$product->image;
+                                  $path="http://127.0.0.1:8000/".$path; 
+                            
+                            ?>
+                            <img src={{ $path }} width="100%" height="210px">
                         </div>
                         <div class="card-body">
                             <h5>
@@ -63,3 +69,4 @@
         </div>
     </div>
 @endsection
+
